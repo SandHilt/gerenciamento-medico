@@ -1,66 +1,34 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { Headline4 } from "@material/react-typography";
+import { Headline4, Body2 } from "@material/react-typography";
 import { Grid, Row, Cell } from "@material/react-layout-grid";
-import TopAppBar, {
-    TopAppBarRow,
-    TopAppBarSection,
-    TopAppBarFixedAdjust,
-    TopAppBarTitle
-} from "@material/react-top-app-bar";
 import Card, { CardPrimaryContent } from "@material/react-card";
-import TabBar, { Tab } from "@material/react-tab-bar";
 import Login from "./Login";
 import Register from "./Register";
 import Footer from "./Footer";
+import Menu from "./Menu";
 
 const Main = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    function handleActiveIndexUpdate(newIndex) {
-        setActiveIndex(newIndex);
-    }
+    const authentication = [<Login />, <Register />].map((el, i) => (
+        <Cell
+            key={i}
+            desktopColumns={6}
+            tabletColumns={6}
+            hidden={activeIndex != i}
+        >
+            <Card>
+                <CardPrimaryContent className="item">{el}</CardPrimaryContent>
+            </Card>
+        </Cell>
+    ));
 
-    const tabs = ["Entrar", "Registre-se"].map(function(palavra, index) {
-        return (
-            <Tab minWidth isMinWidthIndicator key={index}>
-                <span className="mdc-tab__text-label">{palavra}</span>
-            </Tab>
-        );
-    });
-
-    const showContent = [<Login />, <Register />].map(function(el, i) {
-        return (
-            <Cell
-                key={i}
-                desktopColumns={6}
-                tabletColumns={6}
-                hidden={activeIndex != i}
-            >
-                <Card>
-                    <CardPrimaryContent className="item">
-                        {el}
-                    </CardPrimaryContent>
-                </Card>
-            </Cell>
-        );
-    });
+    const offsetContent = <Cell desktopColumns={3} tabletColumns={1} />;
 
     return (
         <React.Fragment>
-            <TopAppBar id="Menu">
-                <TopAppBarRow>
-                    <TopAppBarSection align="end">
-                        <TabBar
-                            activeIndex={activeIndex}
-                            handleActiveIndexUpdate={handleActiveIndexUpdate}
-                        >
-                            {tabs}
-                        </TabBar>
-                    </TopAppBarSection>
-                </TopAppBarRow>
-            </TopAppBar>
-            <TopAppBarFixedAdjust />
+            <Menu {...{ activeIndex, setActiveIndex }} />
             <Grid id="App">
                 <Row className="section" tag="header">
                     <Cell
@@ -83,12 +51,21 @@ const Main = () => {
                     </Cell>
                 </Row>
                 <Row className="section">
-                    <Cell desktopColumns={3} tabletColumns={1} />
-                    {showContent}
+                    {offsetContent}
+                    {authentication}
                 </Row>
-                <Row className="section">
-                    <Cell tag="footer">
+                <Row tag="footer">
+                    <Cell desktopColumns={6}>
                         <Footer />
+                    </Cell>
+                    <Cell desktopColumns={6}>
+                        <address>
+                            <Body2>
+                                Em caso de dúvidas, entre em contato pelo
+                                telefone (21) 2545-3564 ou no e-mail
+                                cadastromedico@copador.com.br
+                            </Body2>
+                        </address>
                     </Cell>
                 </Row>
             </Grid>
