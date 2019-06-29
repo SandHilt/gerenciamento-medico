@@ -4936,3 +4936,7 @@ svg.mdc-button__icon {
   max-width: 200px;
 }
 
+#App footer figure {
+  margin: 0;
+}
+
