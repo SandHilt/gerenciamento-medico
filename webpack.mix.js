@@ -12,6 +12,7 @@ const mix = require("laravel-mix");
  */
 
 mix.react("resources/js/app.js", "public/js")
-    .sass("resources/sass/app.scss", "public/css")
-    .sourceMaps()
-    .version();
+    .sass("resources/sass/app.scss", "public/css", {
+        includePaths: ["node_modules"]
+    })
+    .sourceMaps();

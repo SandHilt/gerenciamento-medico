@@ -1,8 +1,66 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// Reset
+// @import "bootstrap/scss/bootstrap-reboot";
 
 // Variables
-@import 'variables';
+@import "variables";
+
+// External
+@import "@material/react-tab-bar/index.scss";
+@import "@material/react-tab-scroller/index.scss";
+@import "@material/react-tab/index.scss";
+@import "@material/react-tab-indicator/index.scss";
+
+@import "@material/react-typography/index.scss";
+@import "@material/react-layout-grid/index.scss";
+@import "@material/react-top-app-bar/index.scss";
+@import "@material/react-card/index.scss";
+@import "@material/react-button/index.scss";
+@import "@material/react-text-field/index.scss";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// #Menu {
+//     @include mdc-top-app-bar-fill-color-accessible($menu-color);
+
+//     .item {
+//         @include mdc-tab-ink-color(#333);
+//         @include mdc-tab-active-icon-color(green);
+//         @include mdc-tab-active-text-label-color(transparent);
+//         // @include mdc-tab-active-states-color(green);
+//     }
+// }
+
+#Menu {
+    @include mdc-top-app-bar-fill-color-accessible(white);
+}
+
+#App {
+    max-width: 1024px;
+
+    > .section {
+        margin-bottom: 30px;
+
+        .item {
+            padding: 15px;
+        }
+    }
+
+    .MainTitle {
+        text-align: center;
+    }
+
+    #Container_CopaDor {
+        padding: 30px;
+    }
+
+    .Logo {
+        width: 100%;
+        height: auto;
+
+        // &__CopaDor {
+        // }
+
+        &__IPNET {
+            max-width: 200px;
+        }
+    }
+}
