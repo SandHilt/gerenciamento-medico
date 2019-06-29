@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { Headline4 } from "@material/react-typography";
-import { Grid, Row, Cell } from "@material/react-layout-grid";
-import Card, { CardPrimaryContent } from "@material/react-card";
-import Login from "./Login";
-import Register from "./Register";
-import Footer from "./Footer";
-import Menu from "./Menu";
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Headline4 } from '@material/react-typography';
+import { Grid, Row, Cell } from '@material/react-layout-grid';
+import Card, { CardPrimaryContent } from '@material/react-card';
+import Login from './Login';
+import Register from './Register';
+import Footer from './Footer';
+import Menu from './Menu';
 
 const Main = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -18,8 +18,10 @@ const Main = () => {
             tabletColumns={6}
             hidden={activeIndex != i}
         >
-            <Card>
-                <CardPrimaryContent className="item">{el}</CardPrimaryContent>
+            <Card tag='article'>
+                <CardPrimaryContent className='CardItem'>
+                    {el}
+                </CardPrimaryContent>
             </Card>
         </Cell>
     ));
@@ -27,25 +29,25 @@ const Main = () => {
     const offsetContent = <Cell desktopColumns={3} tabletColumns={1} />;
 
     return (
-        <Grid id="App">
-            <Row className="section" tag="header">
-                <Cell id="Container_CopaDor" align="middle" desktopColumns={4}>
+        <Grid tag='main' id='App'>
+            <Row className='section' tag='header'>
+                <Cell id='Container_CopaDor' align='middle' desktopColumns={4}>
                     <img
-                        className="Logo Logo__CopaDor"
-                        src="storage/images/Logo_CopaDor.png"
+                        className='Logo Logo__CopaDor'
+                        src='storage/images/Logo_CopaDor.png'
                         alt="Logo do Copa D'or"
                     />
                 </Cell>
-                <Cell align="middle" className="MainTitle" desktopColumns={8}>
+                <Cell align='middle' id='MainTitle' desktopColumns={8}>
                     <Headline4>Gerenciamento do Corpo Clínico</Headline4>
                 </Cell>
-            </Row>
-            <Row className="section">
-                <Cell>
+                <Cell tag='nav'>
                     <Menu {...{ activeIndex, setActiveIndex }} />
                 </Cell>
             </Row>
-            <Row className="section">
+            {/* <Row tag="nav" className='section'>
+            </Row> */}
+            <Row className='section'>
                 {offsetContent}
                 {authentication}
             </Row>
@@ -56,6 +58,6 @@ const Main = () => {
 
 export default Main;
 
-if (document.getElementById("root")) {
-    ReactDOM.render(<Main />, document.getElementById("root"));
+if (document.getElementById('root')) {
+    ReactDOM.render(<Main />, document.getElementById('root'));
 }

@@ -1,21 +1,21 @@
 // Reset
-// @import "bootstrap/scss/bootstrap-reboot";
+@import 'bootstrap/scss/bootstrap-reboot';
 
 // Variables
-@import "variables";
+@import 'variables';
 
 // External
-@import "@material/react-tab-bar/index.scss";
-@import "@material/react-tab-scroller/index.scss";
-@import "@material/react-tab/index.scss";
-@import "@material/react-tab-indicator/index.scss";
+@import '@material/react-tab-bar/index.scss';
+@import '@material/react-tab-scroller/index.scss';
+@import '@material/react-tab/index.scss';
+@import '@material/react-tab-indicator/index.scss';
 
-@import "@material/react-typography/index.scss";
-@import "@material/react-layout-grid/index.scss";
-@import "@material/react-top-app-bar/index.scss";
-@import "@material/react-card/index.scss";
-@import "@material/react-button/index.scss";
-@import "@material/react-text-field/index.scss";
+@import '@material/react-typography/index.scss';
+@import '@material/react-layout-grid/index.scss';
+@import '@material/react-top-app-bar/index.scss';
+@import '@material/react-card/index.scss';
+@import '@material/react-button/index.scss';
+@import '@material/react-text-field/index.scss';
 
 // Bootstrap
 // #Menu {
@@ -39,17 +39,20 @@
     > .section {
         margin-bottom: 30px;
 
-        .item {
+        .CardItem {
             padding: 15px;
+            @include mdc-card-outline($mdc-theme-primary, 2px);
         }
     }
 
-    .MainTitle {
-        text-align: center;
-    }
+    @at-root {
+        #MainTitle {
+            text-align: center;
+        }
 
-    #Container_CopaDor {
-        padding: 30px;
+        #Container_CopaDor {
+            padding: 30px;
+        }
     }
 
     .Logo {
@@ -62,6 +65,10 @@
         &__IPNET {
             max-width: 200px;
         }
+    }
+
+    .LoginFieldItem {
+        margin-bottom: 15px;
     }
 
     footer {

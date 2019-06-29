@@ -1,12 +1,12 @@
-import React from "react";
-import TabBar, { Tab } from "@material/react-tab-bar";
+import React from 'react';
+import TabBar, { Tab } from '@material/react-tab-bar';
 
 const Menu = ({ activeIndex, setActiveIndex }) => {
-    const handleActiveTabsUpdate = newIndex => setActiveIndex(newIndex);
+    const handleActiveTabsUpdate = (newIndex) => setActiveIndex(newIndex);
 
-    const tabsInMenu = ["Entrar", "Registre-se"].map((palavra, index) => (
+    const tabsInMenu = ['Entrar', 'Registre-se'].map((palavra, index) => (
         <Tab key={index}>
-            <span className="mdc-tab__text-label">{palavra}</span>
+            <span className='mdc-tab__text-label'>{palavra}</span>
         </Tab>
     ));
 

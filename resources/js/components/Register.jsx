@@ -1,12 +1,12 @@
-import React from "react";
-import { Body1, Headline5 } from "@material/react-typography";
-import { CardActionButtons } from "@material/react-card";
-import Button from "@material/react-button";
+import React from 'react';
+import { Body1, Headline5 } from '@material/react-typography';
+import { CardActionButtons } from '@material/react-card';
+import Button from '@material/react-button';
 
 const Register = () => {
     return (
         <React.Fragment>
-            <header className="TitleHeader">
+            <header>
                 <Headline5>Quero me credenciar</Headline5>
             </header>
             <Body1>
