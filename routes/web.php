@@ -13,6 +13,6 @@
 
 Route::get('/', 'AppController@index');
 
-// Auth::routes();
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
