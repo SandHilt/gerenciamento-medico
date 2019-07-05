@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import TextField, { HelperText, Input } from '@material/react-text-field';
-import MaterialIcon from '@material/react-material-icon';
+import React, { useState } from "react";
+import TextField, { HelperText, Input } from "@material/react-text-field";
+import MaterialIcon from "@material/react-material-icon";
 
 const LoginFieldItem = ({
     helperTextContent,
@@ -9,7 +9,7 @@ const LoginFieldItem = ({
     name,
     label,
 }) => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState("");
     let helperText, iconContent;
 
     if (helperTextContent) {
@@ -23,10 +23,11 @@ const LoginFieldItem = ({
     return (
         <React.Fragment>
             <TextField
+                outlined
                 {...{ label, helperText }}
-                trailingIcon={<MaterialIcon icon='delete' />}
+                trailingIcon={<MaterialIcon icon="delete" />}
                 leadingIcon={iconContent}
-                onTrailingIconSelect={() => setValue('')}
+                onTrailingIconSelect={() => setValue("")}
             >
                 <Input
                     maxLength={255}

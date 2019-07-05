@@ -3,7 +3,7 @@ import { Body1, Headline5 } from "@material/react-typography";
 import { CardActionButtons } from "@material/react-card";
 import Button from "@material/react-button";
 
-const Register = ({ nextStep }) => {
+const Register = ({ handleNextStep }) => {
     return (
         <React.Fragment>
             <header>
@@ -19,7 +19,7 @@ const Register = ({ nextStep }) => {
                 "Quero me credenciar".
             </Body1>
             <CardActionButtons>
-                <Button raised onClick={nextStep}>
+                <Button raised onClick={handleNextStep}>
                     Quero me credenciar
                 </Button>
             </CardActionButtons>

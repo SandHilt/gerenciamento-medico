@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Headline4 } from "@material/react-typography";
 import { Grid, Row, Cell } from "@material/react-layout-grid";
@@ -8,6 +8,12 @@ import Menu from "./Menu";
 import Content from "./Content";
 
 const Main = () => {
+    const data = {
+        phone: "+552125453564",
+        email: "cadastromedico@copador.com.br",
+        website: "https://www.ipnet.cloud",
+    };
+
     const [activeIndex, setActiveIndex] = useState(0);
     const [isRegister, setRegisterMode] = useState(false);
 
@@ -24,7 +30,7 @@ const Main = () => {
         }
     };
 
-    const nextStep = () => {
+    const handleNextStep = () => {
         if (isRegister) {
             setActiveIndex(activeIndex + 1);
         } else {
@@ -61,11 +67,12 @@ const Main = () => {
                         isRegister,
                         activeIndex,
                         setActiveIndex,
-                        nextStep,
+                        handleNextStep,
+                        data,
                     }}
                 />
             </Row>
-            <Footer />
+            <Footer {...{ data }} />
         </Grid>
     );
 };

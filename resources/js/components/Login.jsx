@@ -1,6 +1,6 @@
-import React from 'react';
-import { Headline5, Body1 } from '@material/react-typography';
-import LoginField from './LoginField';
+import React from "react";
+import { Headline5, Body1 } from "@material/react-typography";
+import LoginField from "./LoginField";
 
 export default function Login() {
     return (
@@ -16,7 +16,6 @@ export default function Login() {
                 Se você se encaixa em um desses casos, preencha os campos abaixo
                 para acessar.
             </Body1>
-            <hr />
             <LoginField />
         </React.Fragment>
     );

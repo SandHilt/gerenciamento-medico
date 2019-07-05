@@ -10,9 +10,14 @@
 @import "@material/react-tab/index.scss";
 @import "@material/react-tab-indicator/index.scss";
 
+@import "@material/react-list/index.scss";
+@import "@material/react-menu-surface/index.scss";
+@import "@material/react-menu/index.scss";
+@import "@material/react-select/index.scss";
+
+@import "@material/react-icon-button/index.scss";
 @import "@material/react-typography/index.scss";
 @import "@material/react-layout-grid/index.scss";
-@import "@material/react-top-app-bar/index.scss";
 @import "@material/react-card/index.scss";
 @import "@material/react-button/index.scss";
 @import "@material/react-text-field/index.scss";
@@ -30,7 +35,7 @@
 // }
 
 #Menu {
-    @include mdc-top-app-bar-fill-color-accessible(white);
+    // @include mdc-top-app-bar-fill-color-accessible(white);
 
     .item[disable] {
         @include mdc-tab-text-label-color(white);
@@ -40,12 +45,19 @@
 #App {
     max-width: 1024px;
 
+    a {
+        color: $mdc-theme-primary;
+    }
+
+    .mdc-text-field {
+        width: 100%;
+    }
+
     > .section {
         margin-bottom: 30px;
 
         .CardItem {
             padding: 15px;
-            min-height: 150px;
             height: 100%;
             @include mdc-card-outline($mdc-theme-primary, 2px);
         }

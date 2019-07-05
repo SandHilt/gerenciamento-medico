@@ -7,8 +7,9 @@ import {
     Headline4,
     Subtitle1,
 } from "@material/react-typography";
+import NextStepButton from "../NextStepButton";
 
-const Step0 = () => {
+const Step0 = ({ handleNextStep }) => {
     /**
      * Dados que podem ser providos por uma API Restful
      * e pegos via Axios/Fetch API.
@@ -74,6 +75,9 @@ const Step0 = () => {
         <React.Fragment>
             {header}
             {cards}
+            <NextStepButton raised {...{ handleNextStep }}>
+                Efetuar cadastro
+            </NextStepButton>
         </React.Fragment>
     );
 };

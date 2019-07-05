@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Step0 from "./steps/Step0";
 import Card from "@material/react-card";
 import { Cell } from "@material/react-layout-grid";
 import Login from "./Login";
 import Register from "./Register";
 
-const Content = ({ isRegister, activeIndex, nextStep }) => {
+import Step0 from "./steps/Step0";
+import Step1 from "./steps/Step1";
+import Step2 from "./steps/Step2";
+import Step3 from "./steps/Step3";
+import Step4 from "./steps/Step4";
+
+const Content = ({ isRegister, activeIndex, handleNextStep, data }) => {
     const [content, setContent] = useState(null);
 
     /**
@@ -18,7 +23,7 @@ const Content = ({ isRegister, activeIndex, nextStep }) => {
              */
             const authentication = [
                 <Login />,
-                <Register {...{ nextStep }} />,
+                <Register {...{ handleNextStep }} />,
             ].map((el, i) => (
                 <Cell
                     key={i + 1}
@@ -43,27 +48,30 @@ const Content = ({ isRegister, activeIndex, nextStep }) => {
             const step = activeIndex - 3;
 
             if (step >= 0) {
-                let content;
+                let stepContent;
 
                 switch (step) {
                     case 0:
-                        content = <Step0 />;
+                        stepContent = <Step0 {...{ handleNextStep }} />;
                         break;
                     case 1:
-                        content = <div>Primeiro</div>;
+                        stepContent = <Step1 {...{ handleNextStep, data }} />;
+                        console.dir(data);
+                        break;
+                    case 2:
+                        stepContent = <Step2 {...{ handleNextStep }} />;
+                        break;
+                    case 3:
+                        stepContent = <Step3 {...{ handleNextStep }} />;
+                        break;
+                    case 4:
+                        stepContent = <Step4 {...{ handleNextStep }} />;
                         break;
                     default:
                         break;
                 }
-                // const nextButton = (
-                //     <Cell>
-                //         <Button raised onClick={nextStep}>
-                //             Continuar
-                //         </Button>
-                //     </Cell>
-                // );
 
-                setContent(content);
+                setContent(stepContent);
             }
         }
     }, [activeIndex]);
