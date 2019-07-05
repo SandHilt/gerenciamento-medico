@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "603731340aa1d6430232d5fbdfcce03d",
+    "content-hash": "6793444ab74ea311c0648e841093efca",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -467,16 +467,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.8.26",
+            "version": "v5.8.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "1d8ec9afdedc79314c18715056b8143d7e1fac31"
+                "reference": "f1dccffb96f614895393e27e4667105a05407af5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/1d8ec9afdedc79314c18715056b8143d7e1fac31",
-                "reference": "1d8ec9afdedc79314c18715056b8143d7e1fac31",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f1dccffb96f614895393e27e4667105a05407af5",
+                "reference": "f1dccffb96f614895393e27e4667105a05407af5",
                 "shasum": ""
             },
             "require": {
@@ -610,7 +610,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-06-25T16:20:51+00:00"
+            "time": "2019-07-02T13:43:47+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2996,16 +2996,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "1a1a1044ad00e285bd2825fac4c3a0443d90ad33"
+                "reference": "6fb502c23885701a991b0bba974b1a8eb6673577"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/1a1a1044ad00e285bd2825fac4c3a0443d90ad33",
-                "reference": "1a1a1044ad00e285bd2825fac4c3a0443d90ad33",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/6fb502c23885701a991b0bba974b1a8eb6673577",
+                "reference": "6fb502c23885701a991b0bba974b1a8eb6673577",
                 "shasum": ""
             },
             "require": {
@@ -3053,7 +3053,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2019-06-23T09:00:00+00:00"
+            "time": "2019-07-04T09:00:00+00:00"
         },
         {
             "name": "fzaninotto/faker",
@@ -3155,16 +3155,16 @@
         },
         {
             "name": "laravel/homestead",
-            "version": "v8.6.0",
+            "version": "v9.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/homestead.git",
-                "reference": "01227bf1fdcddf61ad1238940fbfb538fc6d953b"
+                "reference": "1302ab4ab746b03d121c3fead3818ded79db1eaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/homestead/zipball/01227bf1fdcddf61ad1238940fbfb538fc6d953b",
-                "reference": "01227bf1fdcddf61ad1238940fbfb538fc6d953b",
+                "url": "https://api.github.com/repos/laravel/homestead/zipball/1302ab4ab746b03d121c3fead3818ded79db1eaa",
+                "reference": "1302ab4ab746b03d121c3fead3818ded79db1eaa",
                 "shasum": ""
             },
             "require": {
@@ -3201,7 +3201,7 @@
                 }
             ],
             "description": "A virtual machine for web artisans.",
-            "time": "2019-06-21T00:49:25+00:00"
+            "time": "2019-07-03T20:00:01+00:00"
         },
         {
             "name": "laravel/telescope",
