@@ -14,8 +14,10 @@
 @import "@material/react-menu-surface/index.scss";
 @import "@material/react-menu/index.scss";
 @import "@material/react-select/index.scss";
+@import "@material/react-checkbox/index.scss";
+@import "@material/react-radio/index.scss";
+@import "@material/react-switch/index.scss";
 
-@import "@material/react-icon-button/index.scss";
 @import "@material/react-typography/index.scss";
 @import "@material/react-layout-grid/index.scss";
 @import "@material/react-card/index.scss";
@@ -23,20 +25,7 @@
 @import "@material/react-text-field/index.scss";
 
 // Bootstrap
-// #Menu {
-//     @include mdc-top-app-bar-fill-color-accessible($menu-color);
-
-//     .item {
-//         @include mdc-tab-ink-color(#333);
-//         @include mdc-tab-active-icon-color(green);
-//         @include mdc-tab-active-text-label-color(transparent);
-//         // @include mdc-tab-active-states-color(green);
-//     }
-// }
-
 #Menu {
-    // @include mdc-top-app-bar-fill-color-accessible(white);
-
     .item[disable] {
         @include mdc-tab-text-label-color(white);
     }
@@ -49,8 +38,31 @@
         color: $mdc-theme-primary;
     }
 
-    .mdc-text-field {
+    %field-fullwidth {
         width: 100%;
+    }
+    %select-multiple {
+        min-height: 200px;
+    }
+
+    .mdc- {
+        &text-field {
+            @extend %field-fullwidth;
+        }
+        &select {
+            @extend %field-fullwidth;
+
+            &--multiple {
+                @extend %select-multiple;
+
+                select {
+                    @extend %select-multiple;
+                }
+            }
+        }
+        &switch {
+            margin-right: 15px;
+        }
     }
 
     > .section {

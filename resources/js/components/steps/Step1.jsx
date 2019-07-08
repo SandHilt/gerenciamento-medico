@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
 import TextField, { Input, HelperText } from "@material/react-text-field";
 import NextStepButton from "../NextStepButton";
-import { Cell } from "@material/react-layout-grid";
-import { Body1, Headline4, Subtitle1 } from "@material/react-typography";
+import { Cell, Row } from "@material/react-layout-grid";
+import {
+    Body1,
+    Headline4,
+    Subtitle1,
+    Headline5,
+} from "@material/react-typography";
 import { parsePhoneNumberFromString as parsePhone } from "libphonenumber-js";
 import { Button } from "@material/react-button";
-import Select, { Option } from "@material/react-select";
-import MaterialIcon from "@material/react-material-icon";
 
-const Step1 = ({ handleNextStep, data: { phone, email } }) => {
+import StepSelectField from "./StepSelectField";
+import StepTextField from "./StepTextField";
+import StepCheckboxListField from "./StepCheckboxListField";
+import StepTextConfirmationField from "./StepTextConfirmationField";
+import StepSwitchField from "./StepSwitchField";
+
+const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
     const [code, setCode] = useState("");
     const [isValidCode, setValidatyCode] = useState(true);
 
     const [content, setContent] = useState(null);
-
-    /**
-     * Campos
-     */
-    const [name, setName] = useState("");
-    const [genre, setGenre] = useState("M");
 
     /**
      * Alguma validação
@@ -31,9 +34,12 @@ const Step1 = ({ handleNextStep, data: { phone, email } }) => {
         }
     };
 
-    const handleChangeGenre = ({ currentTarget: { value } }) => {
-        return setGenre(value);
-    };
+    const today = new Date().toISOString().slice(0, 10);
+    const yearToday = new Date().getFullYear();
+
+    const allAreas = areas.map((area, index) => {
+        return { label: area, value: `area-${index}` };
+    });
 
     useEffect(() => {
         if (isValidCode) {
@@ -43,63 +49,199 @@ const Step1 = ({ handleNextStep, data: { phone, email } }) => {
                         <Headline4>Preencha os campos abaixo:</Headline4>
                         <Subtitle1>Todos os campos são obrigatórios.</Subtitle1>
                     </Cell>
-                    <Cell>
-                        <TextField
-                            outlined
-                            label="Nome completo"
-                            trailingIcon={<MaterialIcon icon="person" />}
-                            helperText={
-                                <HelperText>
-                                    Seu nome completo sem abreviações.
-                                </HelperText>
-                            }
-                        >
-                            <Input
-                                required
-                                value={name}
-                                onChange={({ currentTarget: { value } }) =>
-                                    setName(value)
-                                }
+                    <Cell columns={12} tag="form">
+                        <Row>
+                            <Cell columns={12}>
+                                <Headline5>Dados pessoais</Headline5>
+                            </Cell>
+                            <StepTextField
+                                id="name"
+                                label="Nome completo"
+                                icon="person"
+                                helperTextContent="Seu nome completo sem abreviações."
                                 type="text"
                                 maxLength={255}
+                                minLength={3}
+                                desktopColumns={8}
+                                tabletColumns={12}
                             />
-                        </TextField>
-                    </Cell>
-                    <Cell>
-                        <Select
-                            required
-                            outlined
-                            label="Sexo"
-                            value={genre}
-                            onChange={(e) => handleChangeGenre(e)}
-                        >
-                            <Option value="M">Masculino</Option>
-                            <Option value="F">Feminino</Option>
-                        </Select>
-                    </Cell>
-                    <Cell>
-                        <TextField
-                            leadingIcon={<MaterialIcon icon="event" />}
-                            required
-                            outlined
-                            label="Data de nascimento"
-                        >
-                            <Input type="date" />
-                        </TextField>
-                    </Cell>
-                    <Cell>
-                        <TextField label="Ano de formatura">
-                            <Input
+                            <StepSelectField
+                                id="genre"
+                                defaultValue="M"
+                                label="Sexo"
+                                options={[
+                                    { label: "Masculino", value: "M" },
+                                    { label: "Feminino", value: "F" },
+                                ]}
+                            />
+                            <StepTextField
+                                id="birthday"
+                                label="Data de nascimento"
+                                icon="event"
+                                defaultvalue={today}
+                                max={today}
+                                type="date"
+                            />
+                            <StepTextField
                                 type="number"
-                                min={new Date().getFullYear() - 100}
-                                max={new Date().getFullYear()}
+                                helperTextContent="Somente números."
+                                id="RG"
+                                label="Registro profissional"
+                                maxLength={20}
                             />
-                        </TextField>
+                            <StepTextField
+                                type="number"
+                                helperTextContent="Somente números."
+                                id="CPF"
+                                label="CPF"
+                                maxLength={11}
+                            />
+                        </Row>
+                        <Row>
+                            <Cell columns={12}>
+                                <Headline5>Formação</Headline5>
+                            </Cell>
+                            <StepTextField
+                                desktopColumns={8}
+                                id="interest"
+                                label="Qual seu interesse científico?"
+                                helperTextContent="Linha de pesquisa de interesse"
+                            />
+                            <StepTextField
+                                id="graduationYear"
+                                label="Ano de formatura"
+                                type="number"
+                                min={yearToday - 100}
+                                max={yearToday}
+                            />
+                            <StepCheckboxListField
+                                label="Titulação"
+                                options={[
+                                    { label: "Pós-graduação", id: "post" },
+                                    { label: "Mestrado", id: "master" },
+                                    { label: "Doutorado", id: "doctorade" },
+                                    {
+                                        label: "Títulos de especialista",
+                                        id: "specialist",
+                                    },
+                                ]}
+                            />
+                            <StepSelectField
+                                multiple
+                                helperTextContent="Seleciona uma ou mais opções abaixo"
+                                label="Área(s) de atuação"
+                                options={allAreas}
+                            />
+                            <StepSwitchField
+                                label="Possui título de especialista ou equivalência na área de atuação escolhida?"
+                                id="specialist"
+                                pair={[
+                                    { label: "Não" },
+                                    {
+                                        label: "Sim",
+                                        children: (
+                                            <StepTextField
+                                                id="specialist_name"
+                                                label="Qual especialidade?"
+                                            />
+                                        ),
+                                    },
+                                ]}
+                            />
+                        </Row>
+                        <Row>
+                            <Cell columns={12}>
+                                <Headline5>Contato</Headline5>
+                            </Cell>
+                            <StepTextField
+                                helperTextContent="Como seu nome deve aparecer no crachá? Será utilizado Nome seguido de Sobrenome."
+                                id="cracha"
+                                label="Nome no Crachá"
+                                desktopColumns={8}
+                                tabletColumns={12}
+                            />
+                            <StepTextField
+                                type="number"
+                                helperTextContent="Somente números."
+                                id="CEP"
+                                label="CEP"
+                                maxLength={8}
+                                tabletColumns={2}
+                            />
+                            <StepTextField
+                                helperTextContent="Rua, Travessa ou Aveninda."
+                                id="end"
+                                label="Endereço"
+                                maxLength={255}
+                                desktopColumns={8}
+                                tabletColumns={6}
+                            />
+                            <StepTextField
+                                id="end_num"
+                                label="Número e complemento"
+                                maxLength={255}
+                            />
+                            <StepTextField
+                                id="neighborhood"
+                                label="Bairro"
+                                maxLength={255}
+                            />
+                            <StepTextField
+                                id="state"
+                                label="Estado"
+                                maxLength={255}
+                            />
+                            <StepTextField
+                                id="city"
+                                label="Cidade"
+                                maxLength={255}
+                            />
+                            <StepTextField
+                                desktopColumns={6}
+                                id="phone_home"
+                                label="Telefone Residencial"
+                                helperTextContent="Preencha DDD e número"
+                                type="tel"
+                                maxLength={11}
+                            />
+                            <StepTextField
+                                desktopColumns={6}
+                                id="phone_smartphone"
+                                label="Telefone Celular"
+                                helperTextContent="Preencha DDD e número"
+                                type="tel"
+                                maxLength={11}
+                            />
+                        </Row>
+                        <Row>
+                            <Cell columns={12}>
+                                <Headline5>Acesso</Headline5>
+                            </Cell>
+                            <StepTextConfirmationField
+                                type="email"
+                                desktopColumns={6}
+                                label="E-mail"
+                                id="email"
+                            />
+                            <StepTextConfirmationField
+                                type="password"
+                                desktopColumns={6}
+                                label="Senha"
+                                id="password"
+                            />
+                            {/* <StepSwitchField
+                                id="test"
+                                label="Tem algo a falar?"
+                            /> */}
+                            <Cell>
+                                <Button type="submit">Submeter</Button>
+                            </Cell>
+                        </Row>
                     </Cell>
                 </React.Fragment>
             );
         }
-    }, [isValidCode, name, genre]);
+    }, [isValidCode]);
 
     return (
         <React.Fragment>

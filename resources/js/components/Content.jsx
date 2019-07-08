@@ -56,7 +56,6 @@ const Content = ({ isRegister, activeIndex, handleNextStep, data }) => {
                         break;
                     case 1:
                         stepContent = <Step1 {...{ handleNextStep, data }} />;
-                        console.dir(data);
                         break;
                     case 2:
                         stepContent = <Step2 {...{ handleNextStep }} />;
