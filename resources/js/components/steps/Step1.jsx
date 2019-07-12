@@ -11,6 +11,7 @@ import {
 import { parsePhoneNumberFromString as parsePhone } from "libphonenumber-js";
 import { Button } from "@material/react-button";
 
+import CSRF from "../CSRF";
 import StepSelectField from "./StepSelectField";
 import StepTextField from "./StepTextField";
 import StepCheckboxListField from "./StepCheckboxListField";
@@ -19,7 +20,7 @@ import StepSwitchField from "./StepSwitchField";
 
 const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
     const [code, setCode] = useState("");
-    const [isValidCode, setValidatyCode] = useState(true);
+    const [isValidCode, setValidatyCode] = useState(false);
 
     const [content, setContent] = useState(null);
 
@@ -245,7 +246,8 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
 
     return (
         <React.Fragment>
-            <Cell desktopColumns={4}>
+            <Cell tag="form" method="POST" desktopColumns={4}>
+                <CSRF />
                 <TextField
                     outlined
                     label="Código para o cadastro"
@@ -268,9 +270,10 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
                     />
                 </TextField>
                 <Button
-                    onClick={() => validate()}
+                    onSubmit={() => validate()}
                     disabled={isValidCode}
                     raised
+                    type="submit"
                 >
                     Validar
                 </Button>
