@@ -16,4 +16,4 @@ mix.react("resources/js/app.js", "public/js")
         includePaths: ["node_modules"],
     })
     .options({ processCssUrls: false })
-    .sourceMaps();
+    .sourceMaps(false);

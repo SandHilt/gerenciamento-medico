@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\CodeRequest;
 
 class AppController extends Controller
 {
@@ -15,6 +16,11 @@ class AppController extends Controller
     public function index()
     {
         return view('welcome');
+    }
+
+    public function code(CodeRequest $request)
+    {
+        return $request->validated();
     }
 
     /**

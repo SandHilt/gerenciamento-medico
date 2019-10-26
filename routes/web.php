@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'AppController@index');
+Route::post('/', 'AppController@code');
 
 Auth::routes();
 

@@ -1,10 +1,8 @@
-// Reset
-@import "bootstrap/scss/bootstrap-reboot";
-
 // Variables
 @import "variables";
 
 // External
+@import "@material/react-dialog/index.scss";
 @import "@material/react-tab-bar/index.scss";
 @import "@material/react-tab-scroller/index.scss";
 @import "@material/react-tab/index.scss";
@@ -25,11 +23,9 @@
 @import "@material/react-text-field/index.scss";
 
 // Bootstrap
-#Menu {
-    .item[disable] {
-        @include mdc-tab-text-label-color(white);
-    }
-}
+@import "menu";
+@import "form";
+@import "footer";
 
 #App {
     max-width: 1024px;
@@ -38,40 +34,13 @@
         color: $mdc-theme-primary;
     }
 
-    %field-fullwidth {
-        width: 100%;
-    }
-    %select-multiple {
-        min-height: 200px;
-    }
-
-    .mdc- {
-        &text-field {
-            @extend %field-fullwidth;
-        }
-        &select {
-            @extend %field-fullwidth;
-
-            &--multiple {
-                @extend %select-multiple;
-
-                select {
-                    @extend %select-multiple;
-                }
-            }
-        }
-        &switch {
-            margin-right: 15px;
-        }
-    }
-
-    > .section {
+    .section {
         margin-bottom: 30px;
 
         .CardItem {
             padding: 15px;
             height: 100%;
-            @include mdc-card-outline($mdc-theme-primary, 2px);
+            @include mdc-card-outline($mdc-theme-primary, thin);
         }
     }
 
@@ -99,11 +68,5 @@
 
     .LoginFieldItem {
         margin-bottom: 15px;
-    }
-
-    footer {
-        figure {
-            margin: 0;
-        }
     }
 }

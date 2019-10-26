@@ -3,11 +3,27 @@ import ReactDOM from "react-dom";
 import { Headline4 } from "@material/react-typography";
 import { Grid, Row, Cell } from "@material/react-layout-grid";
 
-import Footer from "./Footer";
+/**
+ * Lida com os menus
+ */
 import Menu from "./Menu";
+
+/**
+ * Gerencia o conteudo da tela
+ */
 import Content from "./Content";
 
+/**
+ * Rodapé estático
+ */
+import Footer from "./Footer";
+import Dialog from "@material/react-dialog";
+import StepBackConfirmation from "./steps/StepBackConfirmation";
+
 const Main = () => {
+    /**
+     * Dados da API
+     */
     const data = {
         phone: "+552125453564",
         email: "cadastromedico@copador.com.br",
@@ -68,17 +84,39 @@ const Main = () => {
         ],
     };
 
+    /**
+     * Para lidar com o menu e entrar no modo de registro
+     * Ou seja, quando estiver com o index acima de 3
+     */
     const [activeIndex, setActiveIndex] = useState(0);
     const [isRegister, setRegisterMode] = useState(false);
+    const [nextIndex, setNextIndex] = useState(null);
+
+    /**
+     * Modal para confirmar a volta
+     */
+    const [openConfirmationBack, setOpenConfirmation] = useState(false);
+
+    const setAction = (action) => {
+        if (action === "confirm") {
+            if (nextIndex === 2) {
+                home();
+            } else {
+                setActiveIndex(nextIndex);
+            }
+        }
+        setNextIndex(null);
+    };
 
     const home = () => {
-        setActiveIndex(0);
         setRegisterMode(false);
+        setActiveIndex(0);
     };
 
     const handleActiveTabsUpdate = (index) => {
-        if (index === 2) {
-            home();
+        if (index >= 2 && index !== activeIndex) {
+            setOpenConfirmation(true);
+            setNextIndex(index);
         } else {
             setActiveIndex(index);
         }
@@ -95,7 +133,12 @@ const Main = () => {
 
     return (
         <Grid tag="main" id="App">
-            <Row className="section" tag="header">
+            <StepBackConfirmation
+                open={openConfirmationBack}
+                setOpen={setOpenConfirmation}
+                {...{ setAction }}
+            />
+            <Row tag="header" className="section">
                 <Cell id="Container_CopaDor" align="middle" desktopColumns={4}>
                     <img
                         className="Logo Logo__CopaDor"

@@ -8,6 +8,7 @@ const LoginFieldItem = ({
     typeInput,
     name,
     label,
+    disabled,
 }) => {
     const [value, setValue] = useState("");
     let helperText, iconContent;
@@ -23,7 +24,6 @@ const LoginFieldItem = ({
     return (
         <React.Fragment>
             <TextField
-                outlined
                 {...{ label, helperText }}
                 trailingIcon={<MaterialIcon icon="delete" />}
                 leadingIcon={iconContent}
@@ -31,7 +31,7 @@ const LoginFieldItem = ({
             >
                 <Input
                     maxLength={255}
-                    {...{ id: name, name }}
+                    {...{ id: name, name, disabled }}
                     type={typeInput}
                     value={value}
                     onChange={({ currentTarget: { value } }) => setValue(value)}

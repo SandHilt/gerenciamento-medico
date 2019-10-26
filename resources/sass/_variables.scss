@@ -4,6 +4,5 @@
 
 // Colors
 $mdc-theme-primary: hsl(46, 70%, 40%);
-$mdc-theme-secondary: hsl(46, 70%, 40%);
-// $mdc-theme-primary: #333;
-$mdc-typography-font-family: unquote("Source Sans Pro, Arial, sans-serif");
+$mdc-theme-secondary: invert($mdc-theme-primary);
+// $mdc-typography-font-family: unquote("Source Sans Pro, Roboto, sans-serif");

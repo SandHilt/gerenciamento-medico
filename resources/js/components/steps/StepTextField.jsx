@@ -4,7 +4,7 @@ import TextField, { HelperText, Input } from "@material/react-text-field";
 import MaterialIcon from "@material/react-material-icon";
 
 const StepTextField = ({
-    defaultvalue,
+    defaultvalue = "",
     label,
     id,
     icon,
@@ -12,26 +12,35 @@ const StepTextField = ({
     helperTextContent,
     desktopColumns,
     tabletColumns,
+    maxLength = 255,
     ...props
 }) => {
     const [value, setValue] = useState(defaultvalue);
 
-    let trailingIcon;
+    const onChange = ({ currentTarget: { value } }) => {
+        if (value.length <= maxLength) {
+            setValue(value);
+        }
+    };
+
+    let leadingIcon;
     if (icon) {
-        trailingIcon = <MaterialIcon {...{ icon }} />;
+        leadingIcon = <MaterialIcon {...{ icon }} />;
     }
 
     return (
         <Cell {...{ desktopColumns, tabletColumns }}>
             <TextField
                 outlined
-                {...{ label, trailingIcon }}
+                trailingIcon={<MaterialIcon icon="delete" />}
+                onTrailingIconSelect={() => setValue(defaultvalue)}
+                {...{ label, leadingIcon }}
                 helperText={<HelperText>{helperTextContent}</HelperText>}
             >
                 <Input
                     required
                     {...{ value, type, id, name: id }}
-                    onChange={({ currentTarget: { value } }) => setValue(value)}
+                    onChange={onChange}
                     {...props}
                 />
             </TextField>

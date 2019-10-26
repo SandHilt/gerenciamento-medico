@@ -14,7 +14,12 @@ const Menu = ({ activeIndex, handleActiveTabsUpdate, isRegister }) => {
 
     useEffect(() => {
         setBackTab(
-            <Tab hidden={!isRegister} minWidth isMinWidthIndicator>
+            <Tab
+                className="item"
+                hidden={!isRegister}
+                minWidth
+                isMinWidthIndicator
+            >
                 <span className="mdc-tab__text-label">Voltar</span>
             </Tab>
         );
@@ -42,7 +47,7 @@ const Menu = ({ activeIndex, handleActiveTabsUpdate, isRegister }) => {
     }, [activeIndex]);
 
     return (
-        <Cell tag="nav" columns={12}>
+        <Cell id="Menu" tag="nav" columns={12}>
             <TabBar
                 activeIndex={activeIndex}
                 handleActiveIndexUpdate={handleActiveTabsUpdate}

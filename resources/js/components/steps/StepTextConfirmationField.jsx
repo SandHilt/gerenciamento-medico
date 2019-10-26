@@ -12,6 +12,7 @@ const StepTextConfirmationField = ({
         <StepTextField
             {...props}
             label={`${prefix} ${label}`}
+            helperTextContent="Confirme o campo anterior."
             id={`confirm_${id}`}
         />
     </React.Fragment>

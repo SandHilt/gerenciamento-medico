@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
-import TextField, { Input, HelperText } from "@material/react-text-field";
-import NextStepButton from "../NextStepButton";
+import { Button } from "@material/react-button";
 import { Cell, Row } from "@material/react-layout-grid";
+import TextField, { HelperText, Input } from "@material/react-text-field";
 import {
     Body1,
     Headline4,
-    Subtitle1,
     Headline5,
+    Subtitle1,
 } from "@material/react-typography";
 import { parsePhoneNumberFromString as parsePhone } from "libphonenumber-js";
-import { Button } from "@material/react-button";
+import React, { useEffect, useState } from "react";
 
 import CSRF from "../CSRF";
-import StepSelectField from "./StepSelectField";
-import StepTextField from "./StepTextField";
+import NextStepButton from "../NextStepButton";
 import StepCheckboxListField from "./StepCheckboxListField";
-import StepTextConfirmationField from "./StepTextConfirmationField";
+import StepSelectField from "./StepSelectField";
 import StepSwitchField from "./StepSwitchField";
+import StepTextConfirmationField from "./StepTextConfirmationField";
+import StepTextField from "./StepTextField";
+import StepTextVerificationField from "./StepTextVerificationField";
 
 const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
     const [code, setCode] = useState("");
@@ -25,9 +26,9 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
     const [content, setContent] = useState(null);
 
     /**
-     * Alguma validação
+     * Alguma validação referente ao codigo
      */
-    const validate = () => {
+    const codeValidate = () => {
         if (code == 18837) {
             setValidatyCode(true);
         } else {
@@ -35,8 +36,10 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
         }
     };
 
-    const today = new Date().toISOString().slice(0, 10);
-    const yearToday = new Date().getFullYear();
+    const now = new Date();
+
+    const today = now.toISOString().slice(0, 10);
+    const yearToday = now.getFullYear();
 
     const allAreas = areas.map((area, index) => {
         return { label: area, value: `area-${index}` };
@@ -50,7 +53,7 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
                         <Headline4>Preencha os campos abaixo:</Headline4>
                         <Subtitle1>Todos os campos são obrigatórios.</Subtitle1>
                     </Cell>
-                    <Cell columns={12} tag="form">
+                    <Cell columns={12}>
                         <Row>
                             <Cell columns={12}>
                                 <Headline5>Dados pessoais</Headline5>
@@ -61,7 +64,6 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
                                 icon="person"
                                 helperTextContent="Seu nome completo sem abreviações."
                                 type="text"
-                                maxLength={255}
                                 minLength={3}
                                 desktopColumns={8}
                                 tabletColumns={12}
@@ -90,12 +92,13 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
                                 label="Registro profissional"
                                 maxLength={20}
                             />
-                            <StepTextField
+                            <StepTextVerificationField
                                 type="number"
                                 helperTextContent="Somente números."
                                 id="CPF"
                                 label="CPF"
                                 maxLength={11}
+                                typeOfValidation="cpf"
                             />
                         </Row>
                         <Row>
@@ -161,57 +164,46 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
                                 desktopColumns={8}
                                 tabletColumns={12}
                             />
-                            <StepTextField
+                            <StepTextVerificationField
                                 type="number"
                                 helperTextContent="Somente números."
                                 id="CEP"
                                 label="CEP"
                                 maxLength={8}
                                 tabletColumns={2}
+                                typeOfValidation="cep"
                             />
                             <StepTextField
                                 helperTextContent="Rua, Travessa ou Aveninda."
                                 id="end"
                                 label="Endereço"
-                                maxLength={255}
                                 desktopColumns={8}
                                 tabletColumns={6}
                             />
                             <StepTextField
                                 id="end_num"
                                 label="Número e complemento"
-                                maxLength={255}
                             />
-                            <StepTextField
-                                id="neighborhood"
-                                label="Bairro"
-                                maxLength={255}
-                            />
-                            <StepTextField
-                                id="state"
-                                label="Estado"
-                                maxLength={255}
-                            />
-                            <StepTextField
-                                id="city"
-                                label="Cidade"
-                                maxLength={255}
-                            />
-                            <StepTextField
+                            <StepTextField id="neighborhood" label="Bairro" />
+                            <StepTextField id="state" label="Estado" />
+                            <StepTextField id="city" label="Cidade" />
+                            <StepTextVerificationField
                                 desktopColumns={6}
                                 id="phone_home"
                                 label="Telefone Residencial"
                                 helperTextContent="Preencha DDD e número"
                                 type="tel"
                                 maxLength={11}
+                                typeOfValidation="phone"
                             />
-                            <StepTextField
+                            <StepTextVerificationField
                                 desktopColumns={6}
                                 id="phone_smartphone"
                                 label="Telefone Celular"
                                 helperTextContent="Preencha DDD e número"
                                 type="tel"
                                 maxLength={11}
+                                typeOfValidation="phone"
                             />
                         </Row>
                         <Row>
@@ -229,14 +221,10 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
                                 desktopColumns={6}
                                 label="Senha"
                                 id="password"
+                                minLength={8}
+                                maxLength={16}
+                                helperTextContent="Escolha uma senha entre 8 e 16 caracteres"
                             />
-                            {/* <StepSwitchField
-                                id="test"
-                                label="Tem algo a falar?"
-                            /> */}
-                            <Cell>
-                                <Button type="submit">Submeter</Button>
-                            </Cell>
                         </Row>
                     </Cell>
                 </React.Fragment>
@@ -246,39 +234,45 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
 
     return (
         <React.Fragment>
-            <Cell tag="form" method="POST" desktopColumns={4}>
+            <Cell tag="form" desktopColumns={6}>
                 <CSRF />
-                <TextField
-                    outlined
-                    label="Código para o cadastro"
-                    helperText={
-                        <HelperText>
-                            O código deve ser um número de 5 dígitos.
-                        </HelperText>
-                    }
-                >
-                    <Input
-                        required
-                        name="code"
-                        type="number"
-                        value={code}
-                        onChange={({ currentTarget: { value } }) =>
-                            setCode(value)
-                        }
-                        max={10 ** 6 - 1}
-                        disabled={isValidCode}
-                    />
-                </TextField>
-                <Button
-                    onSubmit={() => validate()}
-                    disabled={isValidCode}
-                    raised
-                    type="submit"
-                >
-                    Validar
-                </Button>
+                <Row>
+                    <Cell desktopColumns={8}>
+                        <TextField
+                            outlined
+                            label="Código para o cadastro"
+                            helperText={
+                                <HelperText>
+                                    O código deve ser um número de 5 dígitos.
+                                </HelperText>
+                            }
+                        >
+                            <Input
+                                required
+                                name="code"
+                                type="number"
+                                value={code}
+                                onChange={({ currentTarget: { value } }) =>
+                                    setCode(value)
+                                }
+                                maxLength={5}
+                                minLength={5}
+                                disabled={isValidCode}
+                            />
+                        </TextField>
+                    </Cell>
+                    <Cell desktopColumns={4} className="cell-center">
+                        <Button
+                            onClick={() => codeValidate()}
+                            disabled={isValidCode}
+                            raised
+                        >
+                            Validar
+                        </Button>
+                    </Cell>
+                </Row>
             </Cell>
-            <Cell desktopColumns={8}>
+            <Cell desktopColumns={6}>
                 <Body1>
                     Caso você não possua o código para cadastro, entre em
                     contato com o cadastro médico no telefone{" "}
@@ -290,7 +284,7 @@ const Step1 = ({ handleNextStep, data: { phone, email, areas } }) => {
             </Cell>
             {content}
             <Cell columns={12}>
-                <NextStepButton outlined disabled {...{ handleNextStep }}>
+                <NextStepButton raised disabled {...{ handleNextStep }}>
                     Próximo
                 </NextStepButton>
             </Cell>

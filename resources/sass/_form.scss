@@ -1,0 +1,28 @@
+#App {
+    %field-fullwidth {
+        width: 100%;
+    }
+    %select-multiple {
+        min-height: 200px;
+    }
+
+    .mdc- {
+        &text-field {
+            @extend %field-fullwidth;
+        }
+        &select {
+            @extend %field-fullwidth;
+
+            &--multiple {
+                @extend %select-multiple;
+
+                select {
+                    @extend %select-multiple;
+                }
+            }
+        }
+        &switch {
+            margin-right: 15px;
+        }
+    }
+}
