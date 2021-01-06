@@ -27,7 +27,7 @@
         "@material/react-tab-bar": "^0.14.1",
         "@material/react-text-field": "^0.14.1",
         "@material/react-typography": "^0.14.1",
-        "axios": "^0.19.0",
+        "axios": "^0.21.1",
         "cep-promise": "^3.0.7",
         "cross-env": "^5.1",
         "laravel-mix": "^4.1.2",
